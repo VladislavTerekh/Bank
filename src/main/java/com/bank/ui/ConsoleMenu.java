@@ -1,6 +1,6 @@
 package com.bank.ui;
 
-public class Main {
+public class ConsoleMenu {
     public static void main(String[] args) {
 
     }

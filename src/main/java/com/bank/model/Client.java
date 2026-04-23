@@ -6,6 +6,9 @@ public class Client {
     private String email;
     private String phoneNumber;
 
+    //id only came out of a DB
+    private Long id = null;
+
     public Client(String firstName,
                   String secondName,
                   String email,
