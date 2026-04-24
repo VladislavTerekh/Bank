@@ -1,5 +1,6 @@
 package com.bank.service;
 
+import com.bank.dao.ClientDao;
 import com.bank.exception.UserEmailAlreadyInUseException;
 import com.bank.exception.UserPhoneNumberAlreadyInUseException;
 import com.bank.model.Client;
@@ -8,25 +9,22 @@ import java.sql.PreparedStatement;
 
 public class ClientService {
 
-    private Client client;
+    private ClientDao clientDao;
 
-    public ClientService(Client client) {
-        this.client = client;
+    public ClientService(ClientDao clientDao) {
+        this.clientDao = clientDao;
     }
 
 
 
-    public void CreateClient() throws UserEmailAlreadyInUseException, UserPhoneNumberAlreadyInUseException {
-        if (false) {
-            //user email check
-            throw new UserEmailAlreadyInUseException("Email already exists in a Database");
-        }
-        if (false) {
-            //user phone check
-            throw new UserPhoneNumberAlreadyInUseException("Phone number already exists in a Database");
-        }
+    public void createClient(String firstName,
+                             String secondName,
+                             String email,
+                             String phoneNumber) throws UserEmailAlreadyInUseException, UserPhoneNumberAlreadyInUseException {
 
-        //PreparedStatement
+        Client client = new Client(firstName, secondName, email, phoneNumber);
+
+        // clientDao.saveNewClient(client);
     }
 
 }
