@@ -1,28 +1,28 @@
 package com.bank.main;
 
+import com.bank.dao.ClientDao;
+import com.bank.service.ClientService;
+import com.bank.ui.ConsoleMenu;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
-        //create Connection
-        //create ClientDAO
-        //create ClientService
-
-        String url = """
-                jdbc:mysql://localhost:3306/Bank\
-                ?useSSL=false
-                &serverTimezone=UTC
-                &allowPublicKeyRetrieval=true
-                &useUnicode=true
-                &characterEncoding=UTF-8""";
+        String url = "jdbc:mysql://localhost:3306/Bank";
         String user = "root";
-        String password = "1234";
+        String password = "9876543210";
 
-        try (Connection conn = DriverManager.getConnection(url, user, password)){
+        try (Connection connection = DriverManager.getConnection(url, user, password)){
+
+            ClientDao clientDao = new ClientDao(connection);
+            ClientService clientService = new ClientService(clientDao);
+            ConsoleMenu ui = new ConsoleMenu(clientService);
+            ui.start();
 
         } catch (SQLException e) {
+            System.out.println("Couldn't connect to a DB");
             throw new RuntimeException(e);
         }
     }
