@@ -13,7 +13,7 @@ A console-based banking application for bank employees to manage clients, accoun
 ## Tech Stack
 
 ### Current (Phase 1)
-- **Java SE** (version 23.0.1)
+- **Java SE** (version 23)
 - **Maven** - dependency management
 - **JDBC** for database connectivity
 - **MySQL** (local instance)
