@@ -1,6 +1,7 @@
 # Bank Console Management System
 
-🚧 **Early Development Stage** - A learning project for practicing Java SE, JDBC, and MySQL
+🚧 **Early Development Stage** - A learning project for practicing Java SE, JDBC, and MySQL. 
+
 
 ## About
 
@@ -8,11 +9,24 @@ A console-based banking application for bank employees to manage clients, accoun
 
 > ⚠️ **Note:** This is a practice project, not intended for production use.
 
+
 ## Tech Stack
 
+### Current (Phase 1)
 - **Java SE** (version X.X)
+- **Maven** - dependency management
 - **JDBC** for database connectivity
 - **MySQL** (local instance)
+- Console-based UI
+
+### Planned Additions
+- **Spring Boot** - migrate to modern framework
+- **REST API** - expose services via HTTP
+- **JUnit & Mockito** - add unit testing
+- **Docker** - containerization
+- **PostgreSQL** - migrate from MySQL (optional)
+- **Spring Security** - authentication/authorization
+
 
 ## Features (Planned/In Progress)
 
@@ -29,6 +43,7 @@ A console-based banking application for bank employees to manage clients, accoun
   - [ ] Withdrawals
   - [ ] Transfer between accounts
 - [ ] Transaction history
+
 
 ## Prerequisites
 
