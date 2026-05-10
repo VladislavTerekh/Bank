@@ -29,7 +29,7 @@ public class ConsoleMenu {
 
             switch (choice) {
                 case 1:
-                    //call new menu sheet
+                    //call a new menu sheet
                     break;
                 case 0:
                     System.out.println("Goodbye!");
