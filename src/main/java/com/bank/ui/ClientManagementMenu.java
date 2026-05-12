@@ -3,8 +3,6 @@ package com.bank.ui;
 import com.bank.service.ClientService;
 import com.bank.ui.helper.InputHelper;
 
-import java.util.Scanner;
-
 public class ClientManagementMenu {
     private final ClientService clientService;
     private final InputHelper inputHelper;
