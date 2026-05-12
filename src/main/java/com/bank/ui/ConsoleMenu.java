@@ -59,7 +59,7 @@ public class ConsoleMenu {
                 break;
             }
 
-            ClientManagementMenu cmm = new ClientManagementMenu(scanner, clientService, inputHelper);
+            ClientManagementMenu cmm = new ClientManagementMenu(clientService, inputHelper);
 
             switch (choice) {
                 case 1:
