@@ -7,7 +7,7 @@ public class Client {
     private String phoneNumber;
 
     //id only came out of a DB
-    private Long id = null;
+    private String id = null;
 
     public Client(String firstName,
                   String secondName,
@@ -17,6 +17,18 @@ public class Client {
         this.secondName = secondName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    public Client(String firstName, String secondName, String email, String phoneNumber, String id) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getFirstName() {
