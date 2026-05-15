@@ -1,6 +1,8 @@
 package com.bank.ui;
 
+import com.bank.service.BankAccountService;
 import com.bank.service.ClientService;
+import com.bank.service.TransactionService;
 import com.bank.ui.helper.InputHelper;
 
 
@@ -9,11 +11,15 @@ import java.util.Scanner;
 public class ConsoleMenu {
 
     private final ClientService clientService;
+    private final BankAccountService bankAccountService;
+    private final TransactionService transactionService;
     private final Scanner scanner;
     private final InputHelper inputHelper;
 
-    public ConsoleMenu(ClientService clientService) {
+    public ConsoleMenu(ClientService clientService, BankAccountService bankAccountService, TransactionService transactionService) {
         this.clientService = clientService;
+        this.bankAccountService = bankAccountService;
+        this.transactionService = transactionService;
         this.scanner = new Scanner(System.in);
         this.inputHelper = new InputHelper(scanner);
     }
@@ -46,7 +52,7 @@ public class ConsoleMenu {
         while (true) {
             System.out.println("\n=== CLIENT MANAGEMENT MENU ===");
             System.out.println("1. Create client");
-            System.out.println("2. Create bank account for client");
+            System.out.println("2. Create bank account for a client");
             System.out.println("3. Get client info");
             System.out.println("4. Add funds");
             System.out.println("5. Withdraw funds");
@@ -55,18 +61,16 @@ public class ConsoleMenu {
 
             int choice = inputHelper.getIntInput();
 
-            if (choice == 0) {
-                break;
-            }
+            if (choice == 0) return;
 
-            ClientManagementMenu cmm = new ClientManagementMenu(clientService, inputHelper);
+            ClientManagementMenu cmm = new ClientManagementMenu(clientService, bankAccountService, transactionService, inputHelper);
 
             switch (choice) {
                 case 1:
-                    // Call createClient()
+                    cmm.createClient();
                     break;
                 case 2:
-                    // Call createBankAccount()
+                    cmm.createBankAccount();
                     break;
                 case 3:
                     // Call getClientInfo()
