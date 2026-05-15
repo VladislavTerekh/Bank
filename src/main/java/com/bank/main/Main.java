@@ -19,10 +19,11 @@ public class Main {
             ClientDao clientDao = new ClientDao(connection);
             ClientService clientService = new ClientService(clientDao);
             ConsoleMenu ui = new ConsoleMenu(clientService);
+            System.out.println("Connection successful.");
             ui.start();
 
         } catch (SQLException e) {
-            System.out.println("Couldn't connect to a DB");
+            System.out.println("Couldn't connect to a DB.");
             throw new RuntimeException(e);
         }
     }
