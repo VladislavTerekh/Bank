@@ -33,10 +33,9 @@ public class ClientManagementMenu {
 
             try {
                 if (!clientService.isEmailExists(email)) {
-                    return;
+                    break;
                 } else {
                     System.out.println("Email is already in use, try another one");
-                    break;
                 }
             } catch (SQLException e) {
                 System.out.println("Couldn't check email existence, try again later.");
@@ -52,10 +51,9 @@ public class ClientManagementMenu {
 
             try {
                 if (!clientService.isPhoneExists(phoneNumber)) {
-                    return;
+                    break;
                 } else {
                     System.out.println("Phone is already in use, try another one");
-                    break;
                 }
             } catch (SQLException e) {
                 System.out.println("Couldn't check phone existence, try again later.");
@@ -66,11 +64,11 @@ public class ClientManagementMenu {
         try {
             clientService.createClient(firstName, secondName, email, phoneNumber);
         } catch (SQLException e) {
-            System.out.println(" ");
+            System.out.println("sql exception");
         } catch (UserEmailAlreadyInUseException e) {
-            System.out.println("  ");
+            System.out.println("email in use exception");
         } catch (UserPhoneNumberAlreadyInUseException e) {
-            System.out.println("   ");
+            System.out.println("phone in use exception");
         }
 
         System.out.println("Returning to a previous menu page");
