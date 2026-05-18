@@ -9,6 +9,10 @@ public class Client {
     //id only came out of a DB
     private String id = null;
 
+    public Client() {
+
+    }
+
     public Client(String firstName,
                   String secondName,
                   String email,
@@ -29,6 +33,10 @@ public class Client {
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFirstName() {

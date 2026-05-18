@@ -34,7 +34,30 @@ public class ClientDao {
 
     }
 
+    public Client getClient(String phoneNumber) throws SQLException{
+        String sql = "SELECT client_id, name, second_name, email, phone_number " +
+                "FROM Clients WHERE phone_number = ? LIMIT 1";
+        Client client = new Client();
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
+            ps.setString(1, phoneNumber);
+
+            try (ResultSet rs = ps.executeQuery()){
+                if (rs.next()) {
+                    client.setId(rs.getString("client_id"));
+                    client.setFirstName(rs.getString("name"));
+                    client.setSecondName(rs.getString("second_name"));
+                    client.setEmail(rs.getString("email"));
+                    client.setPhoneNumber(rs.getString("phone_number"));
+                } else {
+                    return null;
+                }
+            }
+        }
+
+
+        return client;
+    }
 
     public boolean isEmailExists(String email) throws SQLException {
         String sql = "SELECT EXISTS (SELECT 1 FROM Clients WHERE email = ?)";

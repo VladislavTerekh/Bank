@@ -8,6 +8,7 @@ import com.bank.service.BankAccountService;
 import com.bank.service.ClientService;
 import com.bank.service.TransactionService;
 import com.bank.ui.helper.InputHelper;
+import com.bank.ui.helper.PrintHepler;
 
 import java.sql.SQLException;
 
@@ -16,20 +17,19 @@ public class ClientManagementMenu {
     private final BankAccountService bankAccountService;
     private final TransactionService transactionService;
     private final InputHelper inputHelper;
+    private final PrintHepler printHepler;
+    private final String additionalMsg = " / enter 0 to abort whole operation: ";
 
-    public ClientManagementMenu(ClientService clientService, BankAccountService bankAccountService,
-                                TransactionService transactionService, InputHelper inputHelper) {
+    public ClientManagementMenu(ClientService clientService, BankAccountService bankAccountService, TransactionService transactionService, InputHelper inputHelper, PrintHepler printHepler) {
         this.clientService = clientService;
         this.bankAccountService = bankAccountService;
         this.transactionService = transactionService;
         this.inputHelper = inputHelper;
+        this.printHepler = printHepler;
     }
 
-
-
-
     public void createClient() {
-        String additionalMsg = " / enter 0 to abort whole operation: ";
+
 
         String firstName = inputHelper.getNonEmptyString("To create a new client, enter name" + additionalMsg);
         if (firstName.equals("0")) return;
@@ -88,35 +88,29 @@ public class ClientManagementMenu {
 
 
     public void createBankAccount() {
+        String phoneNumber;
+
+        phoneNumber = inputHelper.getNonEmptyString("To create bank account for existing client please, provide client's phone number" + additionalMsg);
+        if (phoneNumber.equals("0")) return;
+
+
         Client client;
+        try {
+            client = getClient(phoneNumber);
+        } catch (SQLException e) {
+            System.out.println("e = " + e);
+            return;
+        }
 
-        //enter email, phone number or client ID
-        while (true) {
-            System.out.println("To create bank account for existing client please, chose option to provide: ");
-            System.out.println("1. Enter phone number");
-            System.out.println("2. Enter email");
-            System.out.println("3. Enter client ID");
-            System.out.println("0. Abort operation");
-
-            int choice = inputHelper.getIntInput();
-
-            if (choice == 0) return;
-
-            switch (choice) {
-                case 1: //enter phone, get result,
-                    break;
-                case 2: //enter email, get result
-                    break;
-                case 3: //enter client id, get result
-                    break;
-                default: System.out.println("Invalid choice!");
-            }
-
-            if (choice >= 1 && choice <=3) break;
+        if (client == null) {
+            System.out.println("No client was found with that phone number.");
+            return;
+        } else {
+            printHepler.printClientsInfo(client);
         }
 
 
-        client = getClientInfo();
+
         while(true) {
             System.out.println("Is this the client you're looking for?");
             System.out.println("1. Yes");
@@ -125,7 +119,7 @@ public class ClientManagementMenu {
             int choice = inputHelper.getIntInput();
 
             if (choice == 2) {
-                System.out.println("Try again then");
+                System.out.println("Try again then...");
                 return;
             } else if (choice == 1) {
                 System.out.println("Great, moving forward.");
@@ -147,7 +141,7 @@ public class ClientManagementMenu {
             if (choice == 0) return;
 
             switch (choice) {
-                case 1: currency = Currency.EUR; break;
+                case 1: break;
                 case 2: currency = Currency.USD; break;
                 case 3: currency = Currency.BYN; break;
                 default:
@@ -161,10 +155,26 @@ public class ClientManagementMenu {
         bankAccountService.createAccount(client.getId(), currency);
     }
 
+    public void getClientsInfo(){
+        String phoneNumber = inputHelper.getNonEmptyString("Please, provide a phone number" + additionalMsg);
+        if (phoneNumber.equals("0")) {
+            return;
+        }
+        try {
+            Client client = getClient(phoneNumber);
+            if (client == null) {
+                System.out.println("No client was found with that phone number.");
+                return;
+            }
+            printHepler.printClientsInfo(client);
+        } catch (SQLException e){
+            System.out.println(e.getErrorCode());
+        }
 
-    public Client getClientInfo() {
+    }
 
-        //TODO: implement method
-        return new Client(null, null, null, null, null);
+
+    public Client getClient(String phoneNumber) throws SQLException{
+        return clientService.getClient(phoneNumber);
     }
 }

@@ -5,7 +5,7 @@ import com.bank.model.Currency;
 
 public class BankAccountService {
 
-    private BankAccountDao bankAccountDao;
+    private final BankAccountDao bankAccountDao;
 
     public BankAccountService(BankAccountDao bankAccountDao) {
         this.bankAccountDao = bankAccountDao;

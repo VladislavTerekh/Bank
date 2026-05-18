@@ -31,6 +31,10 @@ public class ClientService {
         clientDao.saveNewClient(client);
     }
 
+    public Client getClient(String phoneNumber) throws SQLException{
+        return clientDao.getClient(phoneNumber);
+    }
+
     public void createAccountForAClient(Client client, Currency currency) {
 
     }
